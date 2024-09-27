@@ -9,25 +9,25 @@
         <br><br>
         
         <label for="start">Start:</label>
-        <input type="date" id="start" min="2014-01-01" max="2022-01-01" value="2020-05-05">
+        <input type="date" id="start" min="2014-01-01" max="2022-01-01" v-model="rptStart">
 
         <label for="end">End:</label>
-        <input type="date" id="end" min="2020-05-05" max="2022-01-01" value="2020-05-15">
+        <input type="date" id="end" min="2020-05-05" max="2022-01-01" v-model="rptEnd">
 
         <br><br>
         
         <label for="crop">Crop:</label>
-        <select id="crop" name="crop">
-        <option value="Broccoli">Broccoli</option>
-        <option value="kale" selected>Kale</option>
-        <option value="Peas">Peas</option>
+        <select id="crop" name="crop" v-model="rptCrop">
+            <option value="Broccoli">Broccoli</option>
+            <option value="kale" selected>Kale</option>
+            <option value="Peas">Peas</option>
         </select>
 
         <label for="area">Area:</label>
         <select id="area" name="area">
-        <option value="all" selected>All</option>
-        <option value="Chuau-1" selected>Chuau-1</option>
-        <option value="SQ7" selected>SQ7</option>
+            <option value="all" selected>All</option>
+            <option value="Chuau-1" selected>Chuau-1</option>
+            <option value="SQ7" selected>SQ7</option>
         </select>
 
         <br><br>
@@ -45,9 +45,9 @@
         </ul>
 
         <ul>
-            <li> <strong>Start:</strong>05/01/2018 </li>
-            <li> <strong>End:</strong>05/15/2018 </li>
-            <li> <strong>Crop:</strong>Kale </li>
+            <li> <strong>Start:</strong>{{rptStart}} </li>
+            <li> <strong>End:</strong>{{rptEnd}} </li>
+            <li> <strong>Crop:</strong>{{rptCrop}} </li>
         </ul>
     </div>
 
@@ -81,6 +81,9 @@
             el:"#harvest-report",
             data:{
                 rptTitle:"My Sample Harvest Report",
+                rptStart:"2020-05-05",
+                rptEnd:"2020-05-15",
+                rptCrop:"kale",
             },
         });
     </script>
