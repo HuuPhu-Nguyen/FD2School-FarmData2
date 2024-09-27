@@ -54,7 +54,7 @@
                 <th>Yield</th>
                 <th>Units</th>
             </tr>
-            <tr v-for="log in harvestLogs" :key="log.date + log.area">
+            <tr v-for="log in rptHarvestLogs" :key="log.date + log.area">
                 <td>{{log.date}}</td>
                 <td>{{log.area}}</td>
                 <td>{{log.crop}}</td>
@@ -74,12 +74,13 @@
                 rptCrop:"kale",
                 rptCropList: [ "Broccoli", "kale", "Peas"],
                 rptAreaList: [ "all", "Chuau-1", "SQ7"],
-                harvestLogs: [
+                rptHarvestLogs: [
                     { date: "2018-05-02", area: "Chuau-1", crop: "Kale", yield: 10, units: "Bunches" },
                     { date: "2018-05-05", area: "SQ7", crop: "Kale", yield: 7, units: "Bunches" }
                 ],
             },
         });
+        Vue.config.devtools = true;
     </script>
 
 </html>
