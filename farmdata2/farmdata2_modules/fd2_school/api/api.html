@@ -28,19 +28,12 @@
 
         <br><br>
         
-        <button type="submit" 
-        @click="rptHarvestLogs.push({
-                date:'2018-05-01',
-                area:'Orion-3',
-                crop:'Kale',
-                yield:12,
-                units:'Bunches',
-            })">
-        Generate Report </button>
+        <button type="submit" @click="generateReport">Generate Report </button>
 
         <hr>
 
         <h1>{{rptTitle ? rptTitle : "Mock Harvest Report"}}</h1>  
+
         <p>Details</p>
         <ul>
            <li> <strong>Farm:</strong>{{farm}} </li>
@@ -93,6 +86,20 @@
                 rptAreaList: [ "all", "Chuau-1", "SQ7"],
                 rptHarvestLogs: [],
 
+            },
+            methods:{
+                generateReport: function(){
+                    this.farm="Sample Farm",
+                    this.user="manager1"
+                    this.language="English"
+                    this.rptHarvestLogs.push({
+                            date:'2018-05-01',
+                            area:'Orion-3',
+                            crop:'Kale',
+                            yield:12,
+                            units:'Bunches',
+                            });
+                },
             },
         });
         Vue.config.devtools = true;
