@@ -18,7 +18,7 @@
         
         <label for="crop">Crop:</label>
         <select id="crop" name="crop" v-model="rptCrop">
-            <option v-for="crop in rptCropList">{{crop}}</option>
+            <option v-for="crop in cropNames">{{crop}}</option>
         </select>
 
         <label for="area">Area:</label>
@@ -74,6 +74,19 @@
     <script>
         var harvestReport = new Vue({
             el:"#harvest-report",
+            created() {
+                getIDToCropMap().then((theMap) => {
+                    this.idToCropMap= theMap;
+                    console.log("got the idToCropMap");
+                }).catch((err) => {
+                    console.log("failed to get the idToCropMap");
+                })
+            },
+            computed:{
+                cropNames(){
+                    return this.idToCropMap.values();
+                },
+            },
             data:{
                 farm:"",
                 user:"",
@@ -85,10 +98,21 @@
                 rptCropList: [ "Broccoli", "kale", "Peas"],
                 rptAreaList: [ "all", "Chuau-1", "SQ7"],
                 rptHarvestLogs: [],
+                idToCropMap: new Map(),
 
             },
             methods:{
                 generateReport: function(){
+
+                    axios.get("/farm.json").then((response) => {
+                            console.log("Got Response")
+                            console.log(response)
+                        })
+                        .catch((error) => {
+                            console.log("Error Occurred")
+                            console.log(error)
+                        })
+
                     this.farm="Sample Farm",
                     this.user="manager1"
                     this.language="English"
