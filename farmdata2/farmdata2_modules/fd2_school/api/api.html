@@ -23,7 +23,7 @@
 
         <label for="area">Area:</label>
         <select id="area" name="area">
-            <option v-for="area in rptAreaList">{{area}}</option>
+            <option v-for="area in areaNames">{{area}}</option>
         </select>
 
         <br><br>
@@ -80,11 +80,21 @@
                     console.log("got the idToCropMap");
                 }).catch((err) => {
                     console.log("failed to get the idToCropMap");
-                })
+                });
+
+                getIDToAreaMap().then((theMap) =>{
+                    this.idToAreaMap= theMap;
+                    console.log("got the idToAreaMap");
+                }).catch((err) => {
+                    console.log("failed to get the idToAreaMap");
+                });
             },
             computed:{
                 cropNames(){
-                    return this.idToCropMap.values();
+                    return Array.from(this.idToCropMap.values());
+                },
+                areaNames(){
+                    return Array.from(this.idToAreaMap.values());
                 },
             },
             data:{
@@ -99,7 +109,7 @@
                 rptAreaList: [ "all", "Chuau-1", "SQ7"],
                 rptHarvestLogs: [],
                 idToCropMap: new Map(),
-
+                idToAreaMap: new Map(),
             },
             methods:{
                 generateReport: function(){
