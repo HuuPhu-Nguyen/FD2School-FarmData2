@@ -39,7 +39,7 @@
             console.log(requestUrl);
 
             getAllPages(requestUrl).then((result) => {
-                this.pages=result;
+                this.rptHarvestLogs=result;
                 console.log('got the pages');
                 }).catch((err) => {
                     console.log('failed to get the pages');
@@ -74,13 +74,13 @@
                     <th>Yield</th>
                     <th>Units</th>
                 </tr>
-                <tr v-for="(log, index) in rptHarvestLogs" :key="index">
+                <tr v-for="(log, index) in harvestReportRows" :key="index">
                     <td>{{index+1}}</td>
                     <td>{{log.date}}</td>
                     <td>{{log.area}}</td>
                     <td>{{log.crop}}</td>
                     <td>{{log.yield}}</td>
-                    <td>{{log.units}}</td>
+                    <td>{{log.unit}}</td>
                 </tr>
             </table>
         </div>
@@ -113,6 +113,20 @@
                 areaNames(){
                     return Array.from(this.idToAreaMap.values());
                 },
+                harvestReportRows() {
+	                let tableRows = []
+	                for(let log of this.rptHarvestLogs) {
+		                let tableRow = {
+			            date: dayjs.unix(log.timestamp).format("YYYY-MM-DD"),
+                        area: log.area[0].name,
+                        crop: this.idToCropMap.get(log.data.crop_tid),
+                        yield: log.quantity[0].value,
+                        unit: log.quantity[0].unit.name,
+		                }
+		                tableRows.push(tableRow)
+	                }
+	                return tableRows
+                },
             },
             data:{
                 farm:"",
@@ -127,7 +141,6 @@
                 rptHarvestLogs: [],
                 idToCropMap: new Map(),
                 idToAreaMap: new Map(),
-                pages: [],
             },
             methods:{
                 generateReport: function(){
@@ -141,16 +154,9 @@
                             console.log(error)
                         })
 
-                    this.farm="Sample Farm",
-                    this.user="manager1"
-                    this.language="English"
-                    this.rptHarvestLogs.push({
-                            date:'2018-05-01',
-                            area:'Orion-3',
-                            crop:'Kale',
-                            yield:12,
-                            units:'Bunches',
-                            });
+                     this.farm="Sample Farm",
+                     this.user="manager1"
+                     this.language="English"
                 },
             },
         });
