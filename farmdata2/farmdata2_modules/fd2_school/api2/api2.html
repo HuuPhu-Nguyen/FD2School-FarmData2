@@ -64,7 +64,7 @@
             <li> <strong>Crop:</strong>{{rptCrop}} </li>
         </ul>
 
-        <div v-if="rptHarvestLogs.length > 0">
+        <div v-if="harvestReportRows.length > 0">
             <table border="1">
                 <tr>
                     <th>Row</th>
@@ -123,7 +123,9 @@
                         yield: log.quantity[0].value,
                         unit: log.quantity[0].unit.name,
 		                }
-		                tableRows.push(tableRow)
+                        if (tableRow.crop == this.rptCrop) {
+                            tableRows.push(tableRow);
+                        }
 	                }
 	                return tableRows
                 },
