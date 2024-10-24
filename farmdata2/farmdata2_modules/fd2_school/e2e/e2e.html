@@ -17,12 +17,12 @@
         <br><br>
         
         <label for="crop">Crop:</label>
-        <select id="crop" name="crop" v-model="rptCrop">
+        <select data-cy="crop-names" id="crop" name="crop" v-model="rptCrop">
             <option v-for="crop in cropNames">{{crop}}</option>
         </select>
 
         <label for="area">Area:</label>
-        <select id="area" name="area">
+        <select data-cy="area-names" id="area" name="area">
             <option v-for="area in areaNames">{{area}}</option>
         </select>
 
@@ -137,7 +137,7 @@
                 rptTitle:"My Sample Harvest Report",
                 rptStart:"2020-05-05",
                 rptEnd:"2020-05-15",
-                rptCrop:"kale",
+                rptCrop:"",
                 rptCropList: [ "Broccoli", "kale", "Peas"],
                 rptAreaList: [ "all", "Chuau-1", "SQ7"],
                 rptHarvestLogs: [],
